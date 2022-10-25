@@ -1,0 +1,6 @@
+body { margin: 0; font-family: Roboto, "NunitoSans-Regular", sans-serif; }
+
+@font-face {
+    font-family: NunitoSans-Regular;
+    src: url(../src/assets/fonts/Nunito_Sans/NunitoSans-Regular.ttf);
+ }

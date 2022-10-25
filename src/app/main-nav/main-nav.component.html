@@ -1,0 +1,82 @@
+<mat-toolbar color="primary">
+    <div class="col-md-6 text-center mb-5">
+        <!-- <h2 class="heading-section">COPLAN</h2> -->
+        <img src="../../assets/img/coplan_lgbt.png" alt="COPLAN" srcset="" width="10%" style="display: block; margin-left: auto; margin-right: auto; ">
+    </div>
+
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+        <mat-nav-list>
+            <!-- <a mat-list-item href="meus-dados" *ngIf="(isHandset$ | async)" class="text-nav">Olá, {{ user }}</a>
+                Dados do AVATAR
+            <hr>  -->
+
+            <div class="col-lg-6">
+                <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">home</i>Home</a>
+                <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">calendar_month</i>
+                    Calendario</a>
+                <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">contacts</i> Contatos</a>
+                <a mat-list-item href="#" class="text-nav"> <i class="material-icons icones">collections_bookmark</i>
+                    Notas</a>
+                <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">markunread_mailbox</i>
+                    Timesheet</a>
+                <a mat-list-item href="#" class="text-nav"> <i class="material-icons icones">school</i>
+                    Treinamento</a>
+
+                <a mat-list-item href="#" class="text-nav"><span
+                        class="material-icons icones">contact_support</span>Central
+                    de
+                    Ajuda</a>
+                <a mat-list-item href="javascript:void(0);" (click)="logout()" class="text-nav"><span
+                        class="material-icons icones">power_settings_new</span>Sair</a>
+            </div>
+
+
+
+        </mat-nav-list>
+
+
+    </mat-sidenav>
+
+    <!-- <div class="example-sidenav-content">
+        Main content that resizes properly
+    </div> -->
+
+    <mat-sidenav-content>
+
+        <div class="example-sidenav-content">
+
+            <div class="div_1">
+                <button mat-icon-button (click)="sidenav.toggle()"><i class="material-icons"
+                        [ngClass]="{'rotated': opened}">double_arrow</i></button>
+            </div>
+
+            <div class="col-lg-6 div_2">
+                <ng-content>
+
+                </ng-content>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Exibição das outras paginas no content -->
+
+
+
+    </mat-sidenav-content>
+
+
+</mat-sidenav-container>
+
+<c-footer class="div_footer">
+
+    <div class="ms-auto footer">
+        <span>© Desenvolvido por Renan Mingorazi e Roberto Cordeiro </span>
+
+    </div>
+</c-footer>
