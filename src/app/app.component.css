@@ -1,7 +1,11 @@
 .footer{
     flex-shrink: 0;
     flex-grow: 0;
-    background: #cccccc;
+    /* background: #cccccc; */
     padding: 3px 15px;
     text-align: center;
   }
+
+
+
+  /* rob-cordjr@2022 */
