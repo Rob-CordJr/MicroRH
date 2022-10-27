@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   someValue2: string | undefined;
   isLoading: boolean = false;
   button: string = 'Acesse o Portal';
-  isUserValid: boolean = false;
+  isUserValid: boolean = true;
   isAproved: boolean = false
   isRescued: boolean = false
 

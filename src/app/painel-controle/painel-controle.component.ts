@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PainelControleComponent implements OnInit {
 
+  contact: boolean = false;
+  calendar: boolean = false;
+  notes: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -16,6 +16,16 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list'; 
 import {MatIconModule} from '@angular/material/icon';
 import { FooterModule } from '@coreui/angular';
+import { CalendarComponent } from './calendar/calendar.component';
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+import { NotasAdesivasComponent } from './notas-adesivas/notas-adesivas.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { TreinamentoComponent } from './treinamento/treinamento.component';
+import { TimesheetComponent } from './timesheet/timesheet.component';
+
+
+registerLocaleData(localePT);
 
 
 
@@ -27,8 +37,13 @@ import { FooterModule } from '@coreui/angular';
     PainelControleComponent,
     LoginComponent,
     MainNavComponent,
+    CalendarComponent,
+    NotasAdesivasComponent,
+    TreinamentoComponent,
+    TimesheetComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     FooterModule,
     MatIconModule,
     MatListModule,

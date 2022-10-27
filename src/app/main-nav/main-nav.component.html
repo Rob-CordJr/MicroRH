@@ -10,11 +10,10 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav class="example-sidenav" mode="side" opened [@openCloseSidenav]="isOpen ? 'open' : 'closed'"
         autoSize>
-        <mat-nav-list>
+        <mat-nav-list *ngIf="isPerfil() == 'RH'">
             <!-- <a mat-list-item href="meus-dados" *ngIf="(isHandset$ | async)" class="text-nav">Olá, {{ user }}</a>
                 Dados do AVATAR
             <hr>  -->
-
 
             <button mat-icon-button (click)="isOpen = !isOpen" class="btn_menu">
                 <div *ngIf="!isOpen">
@@ -25,17 +24,49 @@
                 </div>
             </button>
 
-            <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">home</i>Home</a>
-            <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">calendar_month</i>
+            <a mat-list-item href="painel" class="text-nav"><i class="material-icons icones">home</i>Home</a>
+            <a mat-list-item href="calendar" class="text-nav"><i class="material-icons icones">calendar_month</i>
                 Calendario</a>
             <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">contacts</i> Contatos</a>
-            <a mat-list-item href="#" class="text-nav"> <i class="material-icons icones">collections_bookmark</i>
+            <a mat-list-item href="notas" class="text-nav"> <i class="material-icons icones">collections_bookmark</i>
                 Notas</a>
             <a mat-list-item href="#" class="text-nav"><i class="material-icons icones">markunread_mailbox</i>
                 Timesheet</a>
             <a mat-list-item href="#" class="text-nav"> <i class="material-icons icones">school</i>
                 Treinamento</a>
 
+            <a mat-list-item href="#" class="text-nav"><span class="material-icons icones">contact_support</span>Central
+                de
+                Ajuda</a>
+            <a mat-list-item href="javascript:void(0);" (click)="logout()" class="text-nav"><span
+                    class="material-icons icones">power_settings_new</span>Sair</a>
+
+
+
+
+        </mat-nav-list>
+
+        <mat-nav-list *ngIf="isPerfil() == 'Administrador'">
+            <!-- <a mat-list-item href="meus-dados" *ngIf="(isHandset$ | async)" class="text-nav">Olá, {{ user }}</a>
+                Dados do AVATAR
+            <hr>  -->
+
+            <button mat-icon-button (click)="isOpen = !isOpen" class="btn_menu">
+                <div *ngIf="!isOpen">
+                    <i class="material-icons">double_arrow</i>
+                </div>
+                <div *ngIf="isOpen">
+                    <i class="material-icons">close</i>
+                </div>
+            </button>
+
+            <a mat-list-item href="painel" class="text-nav"><i class="material-icons icones">home</i>Home</a>
+            <a mat-list-item href="painel" class="text-nav"><i class="material-icons icones">cake</i>Cadastrar
+                aniversariantes</a>
+            <a mat-list-item href="painel" class="text-nav"><i
+                    class="material-icons icones">manage_accounts</i>Gerenciar Usuarios</a>
+            <a mat-list-item href="painel" class="text-nav"><i class="material-icons icones">settings</i>Modificar
+                Layout</a>
             <a mat-list-item href="#" class="text-nav"><span class="material-icons icones">contact_support</span>Central
                 de
                 Ajuda</a>
@@ -56,13 +87,14 @@
 
 
 
-            <ng-content>
+        <ng-content>
 
-            </ng-content>
+        </ng-content>
 
 
+      
 
- 
+
 
 
 
@@ -74,11 +106,3 @@
 
 
 </mat-sidenav-container>
-
-<c-footer class="div_footer">
-
-    <div class="ms-auto footer">
-        <span>© Desenvolvido por Renan Mingorazi e Roberto Cordeiro </span>
-
-    </div>
-</c-footer>

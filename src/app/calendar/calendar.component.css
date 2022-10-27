@@ -1,0 +1,42 @@
+.calendar_body{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+}
+
+p::first-letter{
+    text-transform: uppercase;
+}
+
+.calendario-dias {
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.calendario-dias div {
+    border: 1px solid #ccc;
+    font-size: 24px;
+    padding: 20px;
+}
+
+.calendario-dias .aniversariantes{
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.calendario-titulo {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    text-align: center;
+}
+
+.calendario-titulo-mes-ano {
+    font-size: 24px;
+}
+
+.calendario-dia-nao-faz-parte-mes-atual {
+    color: #aaa;
+}

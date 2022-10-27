@@ -2,6 +2,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { map, Observable, shareReplay } from 'rxjs';
 import { User } from '../models/User';
 import { sideNavAnimation, sideNavContainerAnimation } from './sidebar-animations';
@@ -18,6 +19,7 @@ import { sideNavAnimation, sideNavContainerAnimation } from './sidebar-animation
 export class MainNavComponent implements OnInit {
   // @ViewChild("sidenav") sidenav: ElementRef | any;
   @ViewChild('sidenav') sidenav: MatSidenav | any;
+  userType: number = 2
   isExpanded: boolean = false;
   showSubmenu: boolean = false;
   isOpen: boolean = false;
@@ -35,8 +37,11 @@ export class MainNavComponent implements OnInit {
 
 
   constructor(
-    private breakpointObserver: BreakpointObserver
-  ) { }
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.user.nm_usuario = 'Roberto dos Santos'
@@ -44,23 +49,25 @@ export class MainNavComponent implements OnInit {
   }
 
   toggle() {
-     this.isOpen = !this.isOpen;
-   }
- 
-  // mouseenter() {
-  //   if (!this.isExpanded) {
-  //     this.isShowing = true;
-  //   }
-  // }
+    this.isOpen = !this.isOpen;
+  }
 
-  // mouseleave() {
-  //   if (!this.isExpanded) {
-  //     this.isShowing = false;
-  //   }
-  // }
+  logout() {
+    this.router.navigate(['/']);
+  }
 
- 
+  isPerfil() {
+    if (this.userType == 1) {
+      return 'Administrador'
+    } else if (this.userType == 2) {
+      return 'RH'
+    }
 
-  logout(){}
+    return false
+  }
+
+
+
+
 
 }
