@@ -7,4 +7,5 @@ export class User {
     create_at: Date | undefined;
     loggin: Date | undefined;
     last_login: Date | undefined;
+    sector: string | undefined;
 }

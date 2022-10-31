@@ -23,6 +23,8 @@ import { NotasAdesivasComponent } from './notas-adesivas/notas-adesivas.componen
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { TreinamentoComponent } from './treinamento/treinamento.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
+import { LocalStorageService } from './services/local-storage.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 registerLocaleData(localePT);
@@ -43,6 +45,7 @@ registerLocaleData(localePT);
     TimesheetComponent,
   ],
   imports: [
+    HttpClientModule,
     MatProgressSpinnerModule,
     FooterModule,
     MatIconModule,
@@ -58,7 +61,7 @@ registerLocaleData(localePT);
     FontAwesomeModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ LocalStorageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

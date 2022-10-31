@@ -1,6 +1,6 @@
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -10,13 +10,13 @@ import { sideNavAnimation, sideNavContainerAnimation } from './sidebar-animation
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.css'],
+  styleUrls: ['./main-nav.component.css', './main-nav.component.scss'],
   animations: [sideNavAnimation, sideNavContainerAnimation]
 })
 
 
 
-export class MainNavComponent implements OnInit {
+export class MainNavComponent implements OnInit, AfterViewInit {
   // @ViewChild("sidenav") sidenav: ElementRef | any;
   @ViewChild('sidenav') sidenav: MatSidenav | any;
   userType: number = 2
@@ -39,8 +39,14 @@ export class MainNavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
+    private renderer : Renderer2
   ) {
 
+  }
+
+  ngAfterViewInit(): void {
+
+    this.renderer.setStyle(this.sidenav._content.nativeElement,  'scrollbar-width', 'none')
   }
 
   ngOnInit(): void {

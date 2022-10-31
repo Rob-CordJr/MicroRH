@@ -1,6 +1,101 @@
 <app-main-nav>
+    <div class="l-cards">
+      
+        <article class="c-card">
+            <div class="c-card__image" (mouseover)="calendar=true" (mouseout)="calendar=false">
 
- <p>Painel de Controle em Construção</p>
+                <a routerLink="calendar">
+                    <div class="card">
+                        <h5 class="text" *ngIf="!calendar">Calendario</h5>
+                        <img src="../../assets/img/calendar.png" width="30%"
+                            alt="image placeholder">
+                        <h5 class="corpo" *ngIf="calendar">Veja os aniversariantes do mês</h5>
+                    </div>
+                </a>
 
+            </div>
 
+        </article>
+        
+        <article class="c-card">
+            <div class="c-card__image" (mouseover)="contatos=true" (mouseout)="contatos=false">
+
+                <a routerLink="contato">
+                    <div class="card">
+                        <h5 class="text" *ngIf="!contatos">Contatos</h5>
+                        <img src="../../assets/img/contact.png" width="30%"
+                            alt="image placeholder">
+                        <h5 class="corpo" *ngIf="contatos">Acesse a lista disponivel de contatos da SMSUB</h5>
+                    </div>
+                </a>
+
+            </div>
+
+        </article>
+        
+        <article class="c-card">
+            <div class="c-card__image" (mouseover)="notes=true" (mouseout)="notes=false">
+
+                <a routerLink="notas">
+                    <div class="card">
+                        <h5 class="text" *ngIf="!notes">Notas</h5>
+                        <img src="../../assets/img/notas.png" width="30%"
+                            alt="image placeholder">
+                        <h5 class="corpo" *ngIf="notes">Guarde suas notas adesivas</h5>
+                    </div>
+                </a>
+
+            </div>
+
+        </article>
+        
+        <article class="c-card">
+            <div class="c-card__image" (mouseover)="timesheet=true" (mouseout)="timesheet=false">
+
+                <a routerLink="timesheet">
+                    <div class="card">
+                        <h5 class="text" *ngIf="!timesheet">Timesheet</h5>
+                        <img src="../../assets/img/timesheet.jpg" width="30%"
+                            alt="image placeholder">
+                        <h5 class="corpo" *ngIf="timesheet">Deixe o seu registro de ponto em dia</h5>
+                    </div>
+                </a>
+
+            </div>
+
+        </article>
+
+        <article class="c-card">
+            <div class="c-card__image" (mouseover)="treinamento=true" (mouseout)="treinamento=false">
+    
+                <a routerLink="treinamento">
+                    <div class="card">
+                        <h5 class="text" *ngIf="!treinamento">Treinamento</h5>
+                        <img src="../../assets/img/treinamento.png" width="30%"
+                            alt="image placeholder">
+                        <h5 class="corpo" *ngIf="treinamento">Aprenda mais sobre o nosso sistema</h5>
+                    </div>
+                </a>
+    
+            </div>
+    
+        </article>
+
+        <article class="c-card">
+            <div class="c-card__image" (mouseover)="central=true" (mouseout)="central=false">
+    
+                <a routerLink="#">
+                    <div class="card">
+                        <h5 class="text" *ngIf="!central">Troca de senha</h5>
+                        <img src="../../assets/img/contact.png" width="30%"
+                            alt="image placeholder">
+                        <h5 class="corpo" *ngIf="central">Aprenda mais sobre o nosso sistema</h5>
+                    </div>
+                </a>
+    
+            </div>
+    
+        </article>
+
+    </div>
 </app-main-nav>
