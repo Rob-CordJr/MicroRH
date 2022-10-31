@@ -25,7 +25,7 @@ import { TreinamentoComponent } from './treinamento/treinamento.component';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { LocalStorageService } from './services/local-storage.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatTableModule} from '@angular/material/table';
 
 registerLocaleData(localePT);
 
@@ -45,6 +45,7 @@ registerLocaleData(localePT);
     TimesheetComponent,
   ],
   imports: [
+    MatTableModule,
     HttpClientModule,
     MatProgressSpinnerModule,
     FooterModule,

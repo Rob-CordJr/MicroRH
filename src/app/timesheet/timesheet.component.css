@@ -1,0 +1,18 @@
+.mat-table{
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.controls{
+    margin-left: 350px;
+    margin-right: 350px;
+    display: block;
+    padding: 10px;
+}
+
+button{
+    margin: 20px;
+    text-align: center;
+}
