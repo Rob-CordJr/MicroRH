@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ModalModule } from '@coreui/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { SidebarModule } from '@coreui/angular';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -47,6 +48,7 @@ registerLocaleData(localePT);
     TimesheetComponent,
   ],
   imports: [
+    ModalModule,
     ReactiveFormsModule,
     MatTableModule,
     HttpClientModule,

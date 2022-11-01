@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   isRescued: boolean = false;
   userLogin: any;
   userType: number = 2;
-
+  public visible = false;
 
   constructor(
 
@@ -87,6 +87,14 @@ export class LoginComponent implements OnInit {
 
 
 
+  }
+
+  toggleLiveDemo(){
+    this.visible = !this.visible;
+  }
+
+  handleLiveDemoChange(event : any){
+    this.visible = event;
   }
 
   SignInForm() {
