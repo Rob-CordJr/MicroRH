@@ -17,7 +17,6 @@ import { sideNavAnimation, sideNavContainerAnimation } from './sidebar-animation
 
 
 export class MainNavComponent implements OnInit, AfterViewInit {
-  // @ViewChild("sidenav") sidenav: ElementRef | any;
   @ViewChild('sidenav') sidenav: MatSidenav | any;
   userType: number = 2
   isExpanded: boolean = false;

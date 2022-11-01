@@ -12063,6 +12063,14 @@ h5,
   font-weight: 700;
 }
 
+.btnAproved{
+  background: green !important;
+}
+.btnRescused{
+  background: red !important;
+}
+
+
 .btn.btn-primary:hover {
   border: 1px solid #2B2E83;
   background: transparent;
