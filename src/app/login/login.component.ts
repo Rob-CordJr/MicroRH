@@ -98,24 +98,29 @@ export class LoginComponent implements OnInit {
   }
 
   SignInForm() {
-    this.authService.signIn({
-      email: this.formAuth.value.email,
-      password: this.formAuth.value.password,
-    }).subscribe(
+    this.authService.signIn(this.formAuth.value).subscribe(
       result => {
+
+        this.isUserValid = true
+        
+
         if (result[0].login == true) {
+          console.log('teste')
           this.user = result;
           this.localStorage.set('id_usuario', result[0].id_usuario);
-          this.localStorage.set('nm_usuario', result[0].nm_usuario);
+          this.localStorage.set('nm_usuario', result[0].nome);
+          this.localStorage.set('nm_usuario', result[0].sobrenome);
           this.localStorage.set('last_login', result[0].last_login);
           this.localStorage.set('sector', result[0].sector);
-          this.localStorage.set('tp_usuario', result[0].tp_usuario);
-          this.localStorage.set('mail', result[0].mail);
-          this.localStorage.set('loggin', result[0].loggin);
+          this.localStorage.set('id_tp_usuario', result[0].tipo);
+          this.localStorage.set('email', result[0].email);
+          this.localStorage.set('login', result[0].login);
           this.localStorage.set('create_at', result[0].create_at)
+          this.localStorage.set('update_at', result[0].update_at)
+          this.localStorage.set('birtday', result[0].birtday)
         }
 
-        switch (result[0].tp_usuario) {
+        switch (result[0].id_tp_usuario) {
           case 1:
      
             this.isLoading = true;
@@ -125,7 +130,7 @@ export class LoginComponent implements OnInit {
               this.button = 'Aprovado, Acesso Permitido';
               this.isAproved = true
             }, 3000)
-            this.router.navigate(['/home-adm']);
+            this.router.navigate(['/painel']);
             break;
 
           case 2:
@@ -137,7 +142,7 @@ export class LoginComponent implements OnInit {
               this.button = 'Aprovado, Acesso Permitido';
               this.isAproved = false
             }, 3000)
-            this.router.navigate(['/home-adm']);
+            this.router.navigate(['/painel']);
             break;
 
           default:
