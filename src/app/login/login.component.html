@@ -67,8 +67,8 @@
 
 
                         </form>
-                        <p class="text-center">Não é membro? Solicite seu acesso <a data-toggle="tab"
-                                (click)="toggleLiveDemo()">Cadastre-se</a></p>
+                        <p class="text-center">Não é membro? Solicite seu acesso <a data-toggle="tab" href="javascript:void(0)"
+                                (click)="open(content)">Cadastre-se</a></p>
                     </div>
                 </div>
             </div>
@@ -76,19 +76,122 @@
     </div>
 
 
-    <c-modal id="liveDemoModal" [visible]="visible" alignment="center" (visibleChange)="handleLiveDemoChange($event)">
-        <c-modal-header>
-            <h5 cModalTitle>Modal title</h5>
-            <button (click)="toggleLiveDemo()" cButtonClose></button>
-        </c-modal-header>
-        <c-modal-body>Woohoo, you are reading this text in a modal!</c-modal-body>
-        <c-modal-footer>
-            <button (click)="toggleLiveDemo()" cButton color="secondary">
-                Close
-            </button>
-            <button cButton color="primary">Save changes</button>
-        </c-modal-footer>
-    </c-modal>
 </section>
 
-<!-- <button (click)="toggleLiveDemo()" cButton>Launch demo modal</button> -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cadastre-se</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group has-float-label">
+                        <input type="text" class="form-control" [(ngModel)]="user.nm_usuario"
+                            placeholder="Insira o seu nome" autocomplete="off" #nm_usuario="ngModel"
+                            [ngModelOptions]="{standalone: true}" required>
+                        <label for="nome">Nome</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group has-float-label">
+                        <input type="text" class="form-control" [(ngModel)]="user.nm_usuariosobrenome"
+                            placeholder="Insira o seu sobrenome" autocomplete="off" #nm_usuariosobrenome="ngModel"
+                            [ngModelOptions]="{standalone: true}" required>
+                        <label for="sobrenome">Sobrenome</label>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group has-float-label">
+                        <input type="email" class="form-control" [(ngModel)]="user.email"
+                            placeholder="@gmail, outlook..." autocomplete="off" #email="ngModel" required
+                            [ngModelOptions]="{standalone: true}">
+                        <label for="email">E-mail</label>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group has-float-label">
+                        <label for="dateOfBirth">Data de Aniversario</label>
+                        <div class="input-group">
+                            <input  [(ngModel)]="user.bithday" class="form-control"
+                                placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" #bithday="ngModel"
+                                [ngModelOptions]="{standalone: true}" />
+                            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-6">
+
+
+
+                    <div class="form-group has-float-label">
+                        <!-- <input type="text" class="form-control" [(ngModel)]="user.sector"
+                            placeholder="COPLAN" autocomplete="off" required #sector="ngModel" [ngModelOptions]="{standalone: true}"> -->
+
+                        <ng-select class="custom" [items]="sector" bindLabel="name" bindValue="id"
+                            [(ngModel)]="selectedSector" [ngModelOptions]="{standalone: true}">
+                        </ng-select>
+                        <label for="sobrenome">Setor</label>
+                    </div>
+
+                    
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group has-float-label">
+                        <input type="text" class="form-control" [(ngModel)]="user.password" autocomplete="off" required
+                            #password="ngModel" placeholder="Insira a sua senha" [ngModelOptions]="{standalone: true}">
+                        <label for="Senha">Senha</label>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group has-float-label">
+                        <input type="text" class="form-control" [(ngModel)]="user.cpassword" id="senha" name="senha"
+                            autocomplete="off"  placeholder="Confirme a sua senha" required #cpassword="ngModel" [ngModelOptions]="{standalone: true}">
+                        <label for="cSenha">Confirme a Senha</label>
+                    </div>
+                </div>
+
+                <div *ngIf="(user.password != user.cpassword) && cpassword.dirty || cpassword.touched">
+                    <small style="color: red">Senhas não coincidem.</small>
+                </div>
+
+                <!-- <div *ngIf="cpassword.required">
+                    <small style="color: red">Senha é obrigatório.</small>
+                </div> -->
+
+
+
+
+            </div>
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); SignUp(); ">Save</button>
+    </div>
+</ng-template>

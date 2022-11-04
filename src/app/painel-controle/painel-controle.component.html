@@ -1,5 +1,5 @@
 <app-main-nav>
-    <div class="l-cards">
+    <!-- <div class="l-cards">
       
         <article class="c-card">
             <div class="c-card__image" (mouseover)="calendar=true" (mouseout)="calendar=false">
@@ -97,5 +97,107 @@
     
         </article>
 
+    </div> -->
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="divisor">AGENDA</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <a routerLink="#">
+                    <div class="card" (mouseover)="contatos=true" (mouseout)="contatos=false">
+                        <h5 class="text" *ngIf="!contatos">Contatos</h5>
+                        <img src="../../assets/img/contact.png" *ngIf="!contatos" class="img_menu">
+                        <h5 class="corpo" *ngIf="contatos">Acesse a lista disponivel de contatos da SMSUB</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a routerLink="#">
+                    <div class="card" (mouseover)="calendar=true" (mouseout)="calendar=false">
+                        <h5 class="text" *ngIf="!calendar">Calendario</h5>
+                        <img src="../../assets/img/calendar.png" *ngIf="!calendar" class="img_menu">
+                        <h5 class="corpo" *ngIf="calendar">Veja os aniversariantes do mês</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a routerLink="#">
+                    <div class="card" (mouseover)="notes=true" (mouseout)="notes=false">
+                        <h5 class="text" *ngIf="!notes">Notas Adesivas</h5>
+                        <img src="../../assets/img/notas.png" *ngIf="!notes" class="img_menu">
+                        <h5 class="corpo" *ngIf="notes">Mostre que você é organizado e faça as suas anotações </h5>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="divisor">TREINAMENTO</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <a routerLink="treinamento">
+                    <div class="card" (mouseover)="treinamento=true" (mouseout)="treinamento=false">
+                        <h5 class="text" *ngIf="!treinamento">Treinamento</h5>
+                        <img src="../../assets/img/treinamento.png" *ngIf="!treinamento"
+                            class="img_menu">
+                        <h5 class="corpo" *ngIf="treinamento">Aprenda mais sobre o nosso sistema </h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="divisor">APONTAMENTOS</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <a routerLink="#">
+                    <div class="card" (mouseover)="timesheet=true" (mouseout)="timesheet=false">
+                        <h5 class="text" *ngIf="!timesheet">Timesheet</h5>
+                        <img src="../../assets/img/timesheet.jpg" *ngIf="!timesheet"
+                            class="img_menu">
+                        <h5 class="corpo" *ngIf="timesheet">Faça os seus apontamentos </h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="divisor">SEGURANÇA</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card" (mouseover)="senha=true" (mouseout)="senha=false">
+                    <h5 class="text" *ngIf="!senha">Alterar senha</h5>
+                    <img src="../../assets/img/config.png" *ngIf="!senha" class="img_menu">
+                    <h5 class="corpo" *ngIf="senha">Alterar senha de acesso</h5>
+                </div>
+            </div>
+            <!-- <div class="col-md-3">
+                    <a routerLink="../meus-dados">
+                        <div class="card" (mouseover)="dados=true" (mouseout)="dados=false">
+                            <h5 class="text" *ngIf="!dados">Meus dados</h5>
+                            <img src="../../../assets/imgs/meus_dados.jpg" *ngIf="!dados"
+                                style="height: 200px;width: auto;">
+                            <h5 class="corpo" *ngIf="dados">Consultar dados do meu perfil </h5>
+                        </div>
+                    </a>
+                </div> -->
+        </div>
     </div>
+
+
+
+
 </app-main-nav>

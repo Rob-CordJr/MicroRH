@@ -1,9 +1,11 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -29,17 +31,29 @@ export class LoginComponent implements OnInit {
   userLogin: any;
   userType: number = 2;
   public visible = false;
+  selectedSector: number | undefined;
+
+  sector = [
+    { id: 1, name: 'COPLAN' },
+    { id: 2, name: 'GABINETE' },
+    { id: 3, name: 'DZU' },
+    { id: 4, name: 'ATOS' },
+  ];
+  cpassword: any;
 
   constructor(
 
     private fb: FormBuilder,
     private authService: AuthService,
     private localStorage: LocalStorageService,
-    private router: Router
-
+    private router: Router,
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {
 
   }
+
+  closeResult = '';
 
   ngOnInit(): void {
 
@@ -60,8 +74,8 @@ export class LoginComponent implements OnInit {
             this.button = 'Aprovado, Usuario Reconhecido';
             alert('Acesso Liberado, Aguarde...');
             this.isAproved = true
-          }, 8000)
-          this.router.navigate(['/painel-adm']);
+          }, 3000)
+          this.router.navigate(['/painel']);
           break;
         }
         // Usuario comum
@@ -71,13 +85,12 @@ export class LoginComponent implements OnInit {
             this.button = 'Aprovado, Usuario Reconhecido';
             alert('Acesso Liberado, Aguarde...');
             this.isAproved = true
-          }, 8000)
-          this.router.navigate(['/painel-rh']);
+          }, 3000)
+          this.router.navigate(['/painel']);
           break;
         }
 
         default:
-
           this.router.navigate(['/']);
           this.button
           break;
@@ -89,23 +102,37 @@ export class LoginComponent implements OnInit {
 
   }
 
-  toggleLiveDemo(){
-    this.visible = !this.visible;
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
   }
 
-  handleLiveDemoChange(event : any){
-    this.visible = event;
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   SignInForm() {
     this.authService.signIn(this.formAuth.value).subscribe(
       result => {
 
-        this.isUserValid = true
-        
-
         if (result[0].login == true) {
-          console.log('teste')
+
           this.user = result;
           this.localStorage.set('id_usuario', result[0].id_usuario);
           this.localStorage.set('nm_usuario', result[0].nome);
@@ -120,56 +147,85 @@ export class LoginComponent implements OnInit {
           this.localStorage.set('birtday', result[0].birtday)
         }
 
-        switch (result[0].id_tp_usuario) {
+        switch (result[0].tipo) {
           case 1:
-     
+            this.isUserValid = true
             this.isLoading = true;
             this.button = 'Processando';
-            setTimeout(() => {
-              this.isLoading = false;
-              this.button = 'Aprovado, Acesso Permitido';
-              this.isAproved = true
-            }, 3000)
-            this.router.navigate(['/painel']);
+            this.toastr.success('Você será redirecionado ao painel de controle', 'Acesso Liberado ')
+            setTimeout(() => { this.router.navigate(['/painel']); }, 5000)
+
             break;
 
           case 2:
-    
+            this.isUserValid = true
             this.isLoading = true;
             this.button = 'Processando';
-            setTimeout(() => {
-              this.isLoading = false;
-              this.button = 'Aprovado, Acesso Permitido';
-              this.isAproved = false
-            }, 3000)
-            this.router.navigate(['/painel']);
+            this.toastr.success('Você será redirecionado ao painel de controle', 'Acesso Liberado ')
+            setTimeout(() => { this.router.navigate(['/painel']); }, 5000)
+
             break;
 
           default:
             this.router.navigate(['/']);
-              this.isLoading = true;
-              this.button = 'Processando';
-              setTimeout(() => {
-                this.isLoading = false;
-                this.button = 'Recusado, Não permitido';
-                alert('Entre em contato com Administrador...');
-                this.isAproved = false
-              }, 3000)
 
             break;
         }
       },
-      error =>{
+      error => {
+        this.isUserValid = false
         this.button = 'Processando';
         this.isLoading = true;
-        setTimeout(() => {
+        if (error.status == 400) {
+          this.toastr.warning('Usuario não encontrado', 'Dados Inválidos', {
+            timeOut: 3000
+          })
           this.isLoading = false;
-          this.button = 'Recusado ou Não permitido';
-          alert('Sistema fora do ar, tente novamente mais tarde');
-          this.isAproved = false
-        }, 3000)
+          this.button = 'Acesse o Portal'
+        }
+        
+        if (error.status == 401) {
+          this.toastr.warning('Usuario não autorizado', 'Consulte o Administrador', {
+            timeOut: 3000
+          })
+          this.isLoading = false;
+          this.button = 'Acesse o Portal'
+        }
+        
+        if (error.status == 500) {
+          this.toastr.warning('Tente novamente mais tarde', 'O portal está fora do ar', {
+            timeOut: 3000
+          })
+          this.isLoading = false;
+          this.button = 'Acesse o Portal'
+        }
+        // console.log(error.)
+        // this.isUserValid = false
+        // this.isLoading = true;
+        // this.button = 'Processando';
+        // this.toastr.warning('Usuario ou senha estão incorretos', 'Dados Invalidos', {
+        //   timeOut: 3000
+        // })
+        // this.isLoading = false;
+        
       }
     );
+  }
+
+  SignUp() {
+    this.user.create_at = new Date()
+    this.user.update_at = new Date()
+
+    this.authService.signUp(this.user).subscribe(
+      result => {
+        this.toastr.success('Aguarde a liberação de acesso pelo Administrador ', 'Cadastro Finalizado')
+      },
+      error => {
+        this.toastr.warning('Tente novamente mais tarde', 'Sistema fora do ar ')
+      }
+    );
+
+
   }
 
 }

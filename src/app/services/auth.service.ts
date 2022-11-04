@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
+import { User } from '../models/User';
 
 
 
@@ -42,7 +43,7 @@ export class AuthService {
       this.isLoggedIn.next(false);
     }
 
-    return this.http.post<any>(environment.apiUrl + 'login', payload, httpOptions);
+    return this.http.post<any>(environment.apiUrl + 'signIn', payload, httpOptions);
 
   }
 
@@ -54,6 +55,16 @@ export class AuthService {
       errordescription: description
     }
     return errors
+  }
+
+  signUp(user : User) : Observable <User>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<User>(environment.apiUrl + 'create', user, httpOptions);
   }
 
   isAuthenticated(){

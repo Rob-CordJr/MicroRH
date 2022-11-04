@@ -1,8 +1,49 @@
+/* @import "~@ng-select/ng-select/themes/default.theme.css"; */
+
+@font-face {
+  font-family: 'frutiger-black';
+  src: url('../../assets/fonts/Frutiger/frutiger-black.ttf');
+}
+
+.modal-title{
+  font-family: 'frutiger-black';
+  color: #2B2E83;
+}
+
+::ng-deep .modal-content{
+  background-color: #eef4ec;
+}
+
 @keyframes spinner {
   to {
     transform: rotate(360deg);
   }
 }
+
+/* .ng-select.custom {
+  min-height: 50px;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  height: auto;
+  padding: 15px;
+  font-size: 14px;
+  color: #222222;
+
+  border-radius: 20px;
+  padding-top: 5px;
+  padding-left: 10px;
+} */
+
+/* .ng-select.custom ::ng-deep .ng-select-container {
+  min-height: 50px;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  border: 1px solid rgb(179, 177, 177) !important;
+  border-radius: 20px;
+} */
+
 
 .fa {
   margin-right: 10px;
@@ -2345,7 +2386,7 @@ pre code {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 3px solid #ced4da;
   border-radius: 0.25rem;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -11468,6 +11509,7 @@ button.bg-dark:focus {
 .text-center {
   text-align: center !important;
   font-size: 14px;
+  font-weight: 700;
 }
 
 @media (min-width: 576px) {
@@ -11856,9 +11898,10 @@ h5,
   overflow: hidden;
   background: #fff;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  /* -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
-  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24); */
 }
 
 .img,
@@ -12064,10 +12107,11 @@ h5,
   font-weight: 700;
 }
 
-.btnAproved{
+.btnAproved {
   background: green !important;
 }
-.btnRescused{
+
+.btnRescused {
   background: red !important;
 }
 

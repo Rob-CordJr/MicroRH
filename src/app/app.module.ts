@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalModule } from '@coreui/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { SidebarModule } from '@coreui/angular';
@@ -29,6 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/AuthGuard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localePT);
 
@@ -48,6 +51,9 @@ registerLocaleData(localePT);
     TimesheetComponent,
   ],
   imports: [
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    NgSelectModule,
     ModalModule,
     ReactiveFormsModule,
     MatTableModule,
@@ -65,7 +71,9 @@ registerLocaleData(localePT);
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule,
+    
   ],
   providers: [AuthService, LocalStorageService, AuthGuard],
   bootstrap: [AppComponent]
