@@ -1,0 +1,173 @@
+<app-main-nav>
+
+    <p-toast></p-toast>
+
+    <div class="card">
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="left">
+                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success p-mr-2"
+                    (click)="openNew()"></button>
+                <button pButton pRipple label="Excluir" icon="pi pi-trash" class="p-button-danger"
+                    (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+            </ng-template>
+
+            <ng-template pTemplate="right">
+                <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Importar" chooseLabel="Importar"
+                    class="p-mr-2 p-d-inline-block"></p-fileUpload>
+                <button pButton pRipple label="Exportar" icon="pi pi-upload" class="p-button-help"></button>
+            </ng-template>
+        </p-toolbar>
+
+        <p-table #dt [value]="user" [rows]="10" [responsive]="true" [paginator]="true"
+            [globalFilterFields]="['nome','sobrenome','sector', 'email', 'perfil']" [(selection)]="selectedUsers"
+            [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    <h5 class="p-m-0">Gerenciar usuarios</h5>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal(target($event).value, 'contains')"
+                            placeholder="Search..." />
+
+
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 3rem">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="nome" >Nome <p-sortIcon field="nome"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="sobrenome">Sobrenome <p-sortIcon field="sobrenome"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="birtday">Data de Aniversario <p-sortIcon field="birtday"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="sector">Setor <p-sortIcon field="sector"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="perfil">Perfil <p-sortIcon field="perfil"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="create_at">Criado em <p-sortIcon field="create_at"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="update_at">Atualizado em <p-sortIcon field="update_at"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="last_login">Ultimo acesso <p-sortIcon field="last_login"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="loggin">Permitir? <p-sortIcon field="loggin"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="action">Ações <p-sortIcon field="action"></p-sortIcon>
+                    </th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                    </td>
+                    <td>{{user.nm_usuario}}</td>
+                    <td>{{user.nm_usuariosobrenome }}</td>
+                    <td>{{user.birtday | date : 'dd MMMM yyyy' : '': 'pt-BR' }}</td>
+                    <td>{{user.sector}}</td>
+                    <td>{{user.id_tp_usuario}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.create_at | date : 'dd MMMM yyyy hh:MM:ss ' : '': 'pt-BR' }}</td>
+                    <td>{{user.update_at | date : 'dd MMMM yyyy hh:MM:ss ' : '': 'pt-BR' }}</td>
+                    <td>{{user.last_login | date : 'dd MMMM yyyy hh:MM:ss' : '': 'pt-BR' }}</td>
+                    <td>
+                        <p-checkbox></p-checkbox>
+
+                    </td>
+
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                            (click)="editUser(user)"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                            (click)="deleteUser(user)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    Total de {{user ? user.length : 0 }} usuarios cadastrados.
+                </div>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <p-dialog [(visible)]="userDialog" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '750px', height: '750px'}" header="Dados do Usuario" [modal]="true"
+        styleClass="p-fluid" [responsive]="true" >
+        <ng-template pTemplate="Long Content" >
+            
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input type="text" id="name" pInputText [(ngModel)]="user.nm_usuario" required autofocus>
+                    <label for="name">Nome</label>
+                </span>
+                <small class="p-invalid" *ngIf="submitted && !user.name">Nome é obrigatório.</small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input type="text" id="sobrenome" pInputText [(ngModel)]="user.nm_usuariosobrenome" required
+                        autofocus>
+                    <label for="sobrenome">Sobrenome</label>
+                </span>
+                <small class="p-invalid" *ngIf="submitted && !user.nm_usuariosobrenome">Sobrenome é obrigatório.</small>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-calendar inputId="calendar" [(ngModel)]="user.birtday"></p-calendar>
+                    <label for="calendar">Calendar</label>
+                </span>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <input type="email" id="email" pInputText [(ngModel)]="user.email" required autofocus>
+                    <label for="email">E-mail</label>
+                </span>
+                <small class="p-invalid" *ngIf="submitted && !user.email">E-mail é obrigatório.</small>
+            </div>
+         
+
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="setores" [(ngModel)]="user.sector" optionLabel="name"></p-dropdown>
+                    <label for="dropdown">Setor</label>
+                </span>
+                <small class="p-invalid" *ngIf="submitted && !user.sector">Setor é obrigatório.</small>
+            </div>
+
+            <div class="field col-12 md:col-4"> 
+                <span class="p-float-label">
+                    <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="perfis" [(ngModel)]="user.id_tp_usuario" optionLabel="name"></p-dropdown>
+                    <label for="dropdown">Perfil</label>
+                </span>
+                <small class="p-invalid" *ngIf="submitted && !user.id_tp_usuario">Perfik é obrigatório.</small>
+            </div>
+
+
+
+            
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-text"
+                (click)="saveUser()"></button>
+        </ng-template>
+    </p-dialog>
+
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+
+</app-main-nav>

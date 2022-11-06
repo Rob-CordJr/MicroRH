@@ -41,6 +41,7 @@ export class NotasAdesivasComponent implements OnInit {
 
   ngOnInit(): void {
     this.notesForm = this.createForm();
+
   }
 
   private createForm(): FormGroup {
@@ -63,6 +64,7 @@ export class NotasAdesivasComponent implements OnInit {
   addNote(){}
 
   saveNote(){
+ 
     if(!this.notesForm.controls.id_note.value){
       this.notesForm.controls.id_note.setValue(this.notesList.length + 1);
       this.notesList.push(this.notesForm.value);
@@ -80,6 +82,7 @@ export class NotasAdesivasComponent implements OnInit {
       id_note: editNoteData.id_note,
       title_note: editNoteData.title_note,
       description_note: editNoteData.description_note,
+      nm_prioridade: 1,
       noteColor: editNoteData.noteColor
     });
   }
