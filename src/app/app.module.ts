@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NgSelectModule } from '@ng-select/ng-select';
+
 import { ModalModule } from '@coreui/angular';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -98,7 +98,7 @@ registerLocaleData(localePT);
     TableModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    NgSelectModule,
+
     ModalModule,
     ReactiveFormsModule,
     MatTableModule,
