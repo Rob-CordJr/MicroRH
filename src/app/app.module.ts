@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-
-import { ModalModule } from '@coreui/angular';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
@@ -18,12 +16,10 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import {FileUploadModule} from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BrowserModule } from '@angular/platform-browser';
-import { SidebarModule } from '@coreui/angular';
-import { IconModule } from '@coreui/icons-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PainelControleComponent } from './painel-controle/painel-controle.component';
@@ -37,7 +33,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { FooterModule } from '@coreui/angular';
 import { CalendarComponent } from './calendar/calendar.component';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
@@ -56,7 +51,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AdmUsuarioComponent } from './adm-usuario/adm-usuario.component';
 import { ListUserResolver } from './guards/ListUserGuard';
 import { LOCALE_ID } from '@angular/core';
-import {CheckboxModule} from 'primeng/checkbox';
+import { CheckboxModule } from 'primeng/checkbox';
 registerLocaleData(localePT);
 
 
@@ -98,20 +93,15 @@ registerLocaleData(localePT);
     TableModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-
-    ModalModule,
     ReactiveFormsModule,
     MatTableModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    FooterModule,
     MatIconModule,
     MatListModule,
     MatToolbarModule,
     MatSidenavModule,
     NgxLoadingButtonsModule,
-    IconModule,
-    SidebarModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
