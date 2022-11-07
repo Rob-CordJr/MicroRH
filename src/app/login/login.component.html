@@ -67,8 +67,8 @@
 
 
                         </form>
-                        <p class="text-center">Não é membro? Solicite seu acesso <a data-toggle="tab" href="javascript:void(0)"
-                                (click)="open(content)">Cadastre-se</a></p>
+                        <!-- <p class="text-center">Não é membro? Solicite seu acesso <a data-toggle="tab" href="javascript:void(0)"
+                                (click)="open(content)">Cadastre-se</a></p> -->
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
 
 </section>
 
-<ng-template #content let-modal>
+<!-- <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Cadastre-se</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -140,8 +140,8 @@
 
 
                     <div class="form-group has-float-label">
-                        <!-- <input type="text" class="form-control" [(ngModel)]="user.sector"
-                            placeholder="COPLAN" autocomplete="off" required #sector="ngModel" [ngModelOptions]="{standalone: true}"> -->
+                       <input type="text" class="form-control" [(ngModel)]="user.sector"
+                            placeholder="COPLAN" autocomplete="off" required #sector="ngModel" [ngModelOptions]="{standalone: true}"> 
 
                         <ng-select class="custom" [items]="sector" bindLabel="name" bindValue="id"
                             [(ngModel)]="selectedSector" [ngModelOptions]="{standalone: true}">
@@ -179,9 +179,9 @@
                     <small style="color: red">Senhas não coincidem.</small>
                 </div>
 
-                <!-- <div *ngIf="cpassword.required">
+             <div *ngIf="cpassword.required">
                     <small style="color: red">Senha é obrigatório.</small>
-                </div> -->
+                </div> 
 
 
 
@@ -194,4 +194,4 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); SignUp(); ">Save</button>
     </div>
-</ng-template>
+</ng-template> -->

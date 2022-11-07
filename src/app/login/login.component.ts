@@ -123,9 +123,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!');
-  }
 
   SignInForm() {
     this.authService.signIn(this.formAuth.value).subscribe(
@@ -176,7 +173,7 @@ export class LoginComponent implements OnInit {
         this.isUserValid = false
         this.button = 'Processando';
         this.isLoading = true;
-        if (error.status == 400) {
+        if (error.status == 400 || error.status == 404) {
           this.toastr.warning('Usuario não encontrado', 'Dados Inválidos', {
             timeOut: 3000
           })
