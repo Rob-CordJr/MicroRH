@@ -1,5 +1,5 @@
 export class User {
-    id_usuario: number | undefined;
+    _id: string | undefined;
     nm_usuario: string | undefined;
     nm_usuariosobrenome: string | undefined;
     tp_usuario: number | undefined;

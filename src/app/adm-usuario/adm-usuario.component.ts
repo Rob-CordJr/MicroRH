@@ -5,26 +5,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { User } from '../models/User';
 
-export interface PeriodicElement {
-  data: string;
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { data: '20/04/2020', position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { data: '20/04/2020', position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { data: '20/04/2020', position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { data: '20/04/2020', position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { data: '20/04/2020', position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { data: '20/04/2020', position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { data: '20/04/2020', position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { data: '20/04/2020', position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { data: '20/04/2020', position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { data: '20/04/2020', position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
 
 @Component({
   selector: 'app-adm-usuario',
@@ -36,8 +16,8 @@ export class AdmUsuarioComponent implements OnInit {
   userDialog: boolean | any;
   selectedUsers: User[] | any;
   submitted: boolean | any;
-  users: User[] | any;
-  dataSource = ELEMENT_DATA;
+  users: User[] = [];
+
   user: User | any;
   value: string | any;
   showLinkedRisksOnly: boolean = true;
@@ -55,13 +35,9 @@ export class AdmUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.route.snapshot.data['userAlls'];
 
-
   }
 
 
-  // applyFilterGlobal($event : any, stringVal : any) {
-  //   this.dt.filterGlobal($event, stringVal);
-  // }
 
   target(event: Event): HTMLInputElement {
     if (!(event.target instanceof HTMLInputElement)) {
@@ -73,7 +49,7 @@ export class AdmUsuarioComponent implements OnInit {
 
 
   openNew() {
-    this.users = {};
+    this.users = [{ ...this.user }];
     this.submitted = false;
     this.userDialog = true;
   }
@@ -91,20 +67,35 @@ export class AdmUsuarioComponent implements OnInit {
     });
   }
 
-  editUser(user: User) {
-    this.user = { ...user };
-    this.userDialog = true;
+  editUser(id_usuario: any) {
+
+    this.userDialog = true
+    var userFound = null
+
+    Object.values(this.user).map((campo, i) => {
+      console.log(this.user[i])
+      if (this.user[i]._id === id_usuario) userFound = campo
+    })
+
+    this.user = userFound
+   
+    return this.user
+
+
+
+
+
   }
 
   deleteUser(user: User) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + user.nm_usuario + '?',
+      message: 'Tem certeza de que vai deletar ' + user.nm_usuario + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.user = this.user.filter((val: { id: number | undefined; }) => val.id !== user.id_usuario);
+        this.user = this.user.filter((val: { id: number | undefined; }) => val.id !== user._id);
         this.user = {};
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Usuario excluido', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuario excluido', life: 3000 });
       }
     });
 
@@ -118,7 +109,7 @@ export class AdmUsuarioComponent implements OnInit {
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id_usuario === id) {
+      if (this.users[i]._id === id) {
         index = i;
         break;
       }
@@ -142,13 +133,13 @@ export class AdmUsuarioComponent implements OnInit {
     if (this.user.name.trim()) {
       if (this.user.id) {
         this.users[this.findIndexById(this.user.id)] = this.user;
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'user Updated', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Os dados deste usuario foram atualizados', life: 3000 });
       }
       else {
         this.user.id = this.createId();
         this.user.image = 'user-placeholder.svg';
         this.users.push(this.user);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'user Created', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuario criado com sucesso', life: 3000 });
       }
 
       this.users = [...this.users];

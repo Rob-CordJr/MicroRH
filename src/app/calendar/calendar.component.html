@@ -1,6 +1,6 @@
 <app-main-nav>
-
-    <p>Em andamento</p>
+    <!-- <button (click)="toggleWeekends()">toggle weekends</button> Botão dos dias uteis -->
+    <full-calendar #calendar [options]='calendarOptions' [plugins]="calendarPlugins"></full-calendar>
 
 
 

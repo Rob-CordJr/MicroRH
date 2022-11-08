@@ -2,7 +2,7 @@
 
     <p-toast></p-toast>
 
-    <div class="card">
+<div class="card">
         <p-toolbar styleClass="p-mb-4">
             <ng-template pTemplate="left">
                 <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success p-mr-2"
@@ -28,7 +28,7 @@
                     <h5 class="p-m-0">Gerenciar usuarios</h5>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal(target($event).value, 'contains')"
+                        <input pInputText type="text" (keyup)="dt.filterGlobal(target($event).value, 'contains')"
                             placeholder="Search..." />
 
 
@@ -86,7 +86,7 @@
 
                     <td>
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                            (click)="editUser(user)"></button>
+                            (click)="editUser(user._id)"></button>
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                             (click)="deleteUser(user)"></button>
                     </td>
@@ -99,7 +99,7 @@
             </ng-template>
         </p-table>
 
-    </div>
+    </div> 
 
     <p-dialog [(visible)]="userDialog" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '750px', height: '750px'}" header="Dados do Usuario" [modal]="true"
         styleClass="p-fluid" [responsive]="true" >

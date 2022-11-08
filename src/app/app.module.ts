@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
@@ -52,6 +52,9 @@ import { AdmUsuarioComponent } from './adm-usuario/adm-usuario.component';
 import { ListUserResolver } from './guards/ListUserGuard';
 import { LOCALE_ID } from '@angular/core';
 import { CheckboxModule } from 'primeng/checkbox';
+
+import { TabViewModule } from 'primeng/tabview';
+
 registerLocaleData(localePT);
 
 
@@ -108,6 +111,7 @@ registerLocaleData(localePT);
     FontAwesomeModule,
     BrowserAnimationsModule,
     NgbModule,
+    
 
   ],
   providers: [
@@ -118,6 +122,7 @@ registerLocaleData(localePT);
     AuthGuard,
     ListUserResolver,
     MessageService, ConfirmationService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
