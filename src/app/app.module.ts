@@ -55,7 +55,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
-// import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './services/contact.service';
 import { NgbdSortableHeader } from './directives/sortable.directive';
@@ -126,7 +126,7 @@ registerLocaleData(localePT);
     BrowserAnimationsModule,
     NgbModule,
     CommonModule,
-    // NgSelectModule,
+    NgSelectModule,
     NgbPaginationModule,
     NgbModule,
 
