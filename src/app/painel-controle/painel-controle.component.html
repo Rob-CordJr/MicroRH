@@ -108,7 +108,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <a routerLink="#">
+                <a routerLink="contact">
                     <div class="card" (mouseover)="contatos=true" (mouseout)="contatos=false">
                         <h5 class="text" *ngIf="!contatos">Contatos</h5>
                         <img src="../../assets/img/contact.png" *ngIf="!contatos" class="img_menu">
@@ -117,7 +117,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a routerLink="#">
+                <a routerLink="calendar">
                     <div class="card" (mouseover)="calendar=true" (mouseout)="calendar=false">
                         <h5 class="text" *ngIf="!calendar">Calendario</h5>
                         <img src="../../assets/img/calendar.png" *ngIf="!calendar" class="img_menu">
@@ -127,7 +127,7 @@
             </div>
 
             <div class="col-md-3">
-                <a routerLink="#">
+                <a routerLink="notas">
                     <div class="card" (mouseover)="notes=true" (mouseout)="notes=false">
                         <h5 class="text" *ngIf="!notes">Notas Adesivas</h5>
                         <img src="../../assets/img/notas.png" *ngIf="!notes" class="img_menu">
@@ -139,7 +139,7 @@
 
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="divisor">TREINAMENTO</div>
         </div>
 
@@ -154,9 +154,9 @@
                     </div>
                 </a>
             </div>
-        </div>
-        
-        <div class="row">
+        </div> -->
+
+        <!-- <div class="row">
             <div class="divisor">APONTAMENTOS</div>
         </div>
 
@@ -171,14 +171,15 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="divisor">SEGURANÇA</div>
         </div>
 
         <div class="row">
             <div class="col-md-3">
-                <div class="card" (mouseover)="senha=true" (mouseout)="senha=false">
+                <div class="card" (mouseover)="senha=true" (mouseout)="senha=false"
+                    (click)="openVerticallyCentered(content)">
                     <h5 class="text" *ngIf="!senha">Alterar senha</h5>
                     <img src="../../assets/img/config.png" *ngIf="!senha" class="img_menu">
                     <h5 class="corpo" *ngIf="senha">Alterar senha de acesso</h5>
@@ -201,3 +202,24 @@
 
 
 </app-main-nav>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Alterar a senha</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nova Senha</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Confirme a sua nova senha</label>
+            <input type="password" class="form-control" >
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Salvar</button>
+    </div>
+</ng-template>

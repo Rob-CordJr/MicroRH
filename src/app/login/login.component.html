@@ -67,8 +67,8 @@
 
 
                         </form>
-                        <!-- <p class="text-center">Não é membro? Solicite seu acesso <a data-toggle="tab" href="javascript:void(0)"
-                                (click)="open(content)">Cadastre-se</a></p> -->
+                        <p class="text-center">Não é membro? Solicite seu acesso <a data-toggle="tab"
+                                href="javascript:void(0)" (click)="open(content)">Cadastre-se</a></p>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
 
 </section>
 
-<!-- <ng-template #content let-modal>
+<ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Cadastre-se</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -119,42 +119,40 @@
             </div>
 
             <div class="row">
-
                 <div class="col-lg-6">
+                    <!-- Desenvolver uma solução para o float label -->
                     <div class="form-group has-float-label">
-                        <label for="dateOfBirth">Data de Aniversario</label>
-                        <div class="input-group">
-                            <input  [(ngModel)]="user.bithday" class="form-control"
-                                placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" #bithday="ngModel"
-                                [ngModelOptions]="{standalone: true}" />
-                            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()"
-                                type="button"></button>
-                        </div>
-                    </div>
-                </div>
 
-
-
-                <div class="col-lg-6">
-
-
-
-                    <div class="form-group has-float-label">
-                       <input type="text" class="form-control" [(ngModel)]="user.sector"
-                            placeholder="COPLAN" autocomplete="off" required #sector="ngModel" [ngModelOptions]="{standalone: true}"> 
-
-                        <ng-select class="custom" [items]="sector" bindLabel="name" bindValue="id"
-                            [(ngModel)]="selectedSector" [ngModelOptions]="{standalone: true}">
+                        <ng-select [(ngModel)]="selectedSector" class="form-control"
+                            [ngModelOptions]="{standalone: true}" >
+                            
+                            <ng-option *ngFor="let set of sector" [value]="set.id">{{set.name}}</ng-option>
                         </ng-select>
-                        <label for="sobrenome">Setor</label>
+                        <label for="sector">Setor</label>
                     </div>
 
-                    
+                </div>
+                <div class="col-lg-6">
+                    <!-- Desenvolver uma solução para o float label -->
+                    <div class="form-group has-float-label">
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                [(ngModel)]="model"
+                                ngbDatepicker
+                                #d="ngbDatepicker"
+                            />
+                            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+                        </div>
+                        <label for="sector">Data de Nascimento</label>
+                    </div>
 
                 </div>
-
-
             </div>
+
+
 
             <div class="row">
 
@@ -170,7 +168,8 @@
                 <div class="col-lg-6">
                     <div class="form-group has-float-label">
                         <input type="text" class="form-control" [(ngModel)]="user.cpassword" id="senha" name="senha"
-                            autocomplete="off"  placeholder="Confirme a sua senha" required #cpassword="ngModel" [ngModelOptions]="{standalone: true}">
+                            autocomplete="off" placeholder="Confirme a sua senha" required #cpassword="ngModel"
+                            [ngModelOptions]="{standalone: true}">
                         <label for="cSenha">Confirme a Senha</label>
                     </div>
                 </div>
@@ -179,9 +178,9 @@
                     <small style="color: red">Senhas não coincidem.</small>
                 </div>
 
-             <div *ngIf="cpassword.required">
+                <!-- <div *ngIf="user.cpassword.required">
                     <small style="color: red">Senha é obrigatório.</small>
-                </div> 
+                </div> -->
 
 
 
@@ -192,6 +191,6 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); SignUp(); ">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); SignUp(); ">OK</button>
     </div>
-</ng-template> -->
+</ng-template>

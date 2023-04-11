@@ -8,6 +8,10 @@ img {
   height: 9px;
 }
 
+.container {
+  height: 85vh;
+}
+
 .l-cards {
   display: grid;
   grid-gap: 30px;
@@ -23,12 +27,13 @@ a {
   text-decoration: none;
 }
 
+
 // .card:hover {
 //   box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
 //   cursor: pointer;
 // }
 
-.img_menu{
+.img_menu {
   height: 68%;
   width: 60%;
   margin-top: 10px;

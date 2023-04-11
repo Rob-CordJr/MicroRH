@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-painel-controle',
@@ -17,9 +18,15 @@ export class PainelControleComponent implements OnInit {
 
   
 
-  constructor() { }
+  constructor(private modalService : NgbModal) { }
 
   ngOnInit(): void {
   }
+
+  openVerticallyCentered(content : any) {
+    this.modalService.open(content, { centered: true });
+  }
+
+
 
 }

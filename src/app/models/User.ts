@@ -1,6 +1,6 @@
 export class User {
     _id: string | undefined;
-    nm_usuario: string | undefined;
+    nm_usuario: string = '';
     nm_usuariosobrenome: string | undefined;
     tp_usuario: number | undefined;
     bithday: Date | undefined;

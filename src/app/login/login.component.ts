@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
 import { AuthService } from '../services/auth.service';
@@ -13,6 +13,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  model: NgbDateStruct | undefined;
+	date: { year: number; month: number; } | undefined;
   public formAuth: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
@@ -34,10 +37,30 @@ export class LoginComponent implements OnInit {
   selectedSector: number | undefined;
 
   sector = [
-    { id: 1, name: 'COPLAN' },
-    { id: 2, name: 'GABINETE' },
-    { id: 3, name: 'DZU' },
-    { id: 4, name: 'ATOS' },
+    
+    { id: 1, name: 'ABAST' },
+    { id: 2, name: 'AC' },
+    { id: 3, name: 'AJ' },
+    { id: 4, name: 'ASSESSORIA DE GABINETE' },
+    { id: 5, name: 'ASSESSORIA ESPECIAL' },
+    { id: 6, name: 'ASSESSORIA PARLAMENTAR' },
+    { id: 7, name: 'ASSESSORIA SEC. ADJUNTA' },
+    { id: 8, name: 'ASSESSORIA TECNICA' },
+    { id: 9, name: 'ATOS' },
+    { id: 10, name: 'CADM' },
+    { id: 11, name: 'COGEL' },
+    { id: 12, name: 'CONVIAS' },
+    { id: 13, name: 'COPLAN' },
+    { id: 14, name: 'COPURB' },
+    { id: 15, name: 'COTI' },
+    { id: 16, name: 'DEGUOS' },
+    { id: 17, name: 'DFIN' },
+    { id: 18, name: 'DGEP' },
+    { id: 19, name: 'DZU' },
+    { id: 20, name: 'GABINETE' },
+    { id: 21, name: 'SELIMP' },
+    { id: 22, name: 'UNILOG' },
+   
   ];
   cpassword: any;
 
@@ -224,6 +247,9 @@ export class LoginComponent implements OnInit {
 
 
   }
+
+
+
 
 }
 

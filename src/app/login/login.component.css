@@ -1,4 +1,4 @@
-/* @import "~@ng-select/ng-select/themes/default.theme.css"; */
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 @font-face {
   font-family: 'frutiger-black';
@@ -20,7 +20,7 @@
   }
 }
 
-/* .ng-select.custom {
+.ng-select.custom {
   min-height: 50px;
   box-shadow: 0 0 0 0;
   border: 0 none;
@@ -33,16 +33,21 @@
   border-radius: 20px;
   padding-top: 5px;
   padding-left: 10px;
-} */
+}
 
-/* .ng-select.custom ::ng-deep .ng-select-container {
+.ng-select.custom ::ng-deep .ng-select-container {
   min-height: 50px;
   box-shadow: 0 0 0 0;
   border: 0 none;
   outline: 0;
   border: 1px solid rgb(179, 177, 177) !important;
   border-radius: 20px;
-} */
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+  background-color: #Fff;
+  width: 205px;
+}
 
 
 .fa {

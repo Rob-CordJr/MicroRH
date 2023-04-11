@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
-import { CalendarModule } from 'primeng/calendar';
+// import { CalendarModule } from 'primeng/calendar';
 import { SliderModule } from 'primeng/slider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -33,29 +33,39 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { CalendarComponent } from './calendar/calendar.component';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, DecimalPipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { NotasAdesivasComponent } from './notas-adesivas/notas-adesivas.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TreinamentoComponent } from './treinamento/treinamento.component';
-import { TimesheetComponent } from './timesheet/timesheet.component';
+
 import { LocalStorageService } from './services/local-storage.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/AuthGuard';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { APP_BASE_HREF } from '@angular/common';
-import { AdmUsuarioComponent } from './adm-usuario/adm-usuario.component';
+
 import { ListUserResolver } from './guards/ListUserGuard';
 import { LOCALE_ID } from '@angular/core';
 import { CheckboxModule } from 'primeng/checkbox';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ContactComponent } from './contact/contact.component';
+import { ContactService } from './services/contact.service';
+import { NgbdSortableHeader } from './directives/sortable.directive';
 
-import { TabViewModule } from 'primeng/tabview';
+
+
+
 
 registerLocaleData(localePT);
+
 
 
 
@@ -67,17 +77,21 @@ registerLocaleData(localePT);
     PainelControleComponent,
     LoginComponent,
     MainNavComponent,
-    CalendarComponent,
     NotasAdesivasComponent,
-    TreinamentoComponent,
-    TimesheetComponent,
-    AdmUsuarioComponent,
+    CalendarComponent,
+    ContactComponent,
+    NgbdSortableHeader
   ],
   imports: [
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    MDBBootstrapModule.forRoot(),
     CheckboxModule,
     FileUploadModule,
     ToastModule,
-    CalendarModule,
     SliderModule,
     MultiSelectModule,
     ContextMenuModule,
@@ -111,7 +125,10 @@ registerLocaleData(localePT);
     FontAwesomeModule,
     BrowserAnimationsModule,
     NgbModule,
-    
+    CommonModule,
+    NgSelectModule,
+    NgbPaginationModule,
+    NgbModule,
 
   ],
   providers: [
@@ -121,8 +138,10 @@ registerLocaleData(localePT);
     LocalStorageService,
     AuthGuard,
     ListUserResolver,
-    MessageService, ConfirmationService],
+    MessageService, ConfirmationService,
+    DecimalPipe,
+    ContactService],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: []
 })
 export class AppModule { }
