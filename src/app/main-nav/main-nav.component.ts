@@ -49,7 +49,7 @@ export class MainNavComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.user.nm_usuario = 'Roberto dos Santos'
+    // this.user.nm_usuario = 'Roberto dos Santos'
 
   }
 
