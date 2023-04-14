@@ -1,4 +1,5 @@
 export class User {
+    [key: string]: any; 
     _id: string | undefined;
     nm_usuario: string = '';
     nm_usuariosobrenome: string | undefined;
@@ -9,7 +10,7 @@ export class User {
     email: string  | undefined;
     create_at: Date | undefined;
     update_at: Date | undefined;
-    loggin: Date | undefined;
+    loggin: boolean | undefined;
     last_login: Date | undefined;
     sector: string | undefined;
 }

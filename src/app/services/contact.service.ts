@@ -39,9 +39,8 @@ function matches(contact: Contact, term: string) {
   
   
   return contact.nm_contact.toLowerCase().includes(term)
-    // || contact.nm_setor && contact.nm_setor.toLowerCase().includes(term)
-    // || contact.num_ramal && contact.num_ramal.toLowerCase().includes(term)
-  // || isValidNumber(setor) && setor.includes(term);
+    || contact.nm_setor && contact.nm_setor.toLowerCase().includes(term)
+    || contact.num_ramal && contact.num_ramal.toLowerCase().includes(term)
 }
 
 
@@ -151,7 +150,6 @@ export class ContactService {
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
-
     this._search$.next();
   }
 

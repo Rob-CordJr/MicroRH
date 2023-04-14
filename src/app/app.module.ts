@@ -47,7 +47,7 @@ import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { ListUserResolver } from './guards/ListUserGuard';
+
 import { LOCALE_ID } from '@angular/core';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -59,6 +59,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './services/contact.service';
 import { NgbdSortableHeader } from './directives/sortable.directive';
+import { AdmComponent } from './adm/adm.component';
 
 
 
@@ -80,7 +81,8 @@ registerLocaleData(localePT);
     NotasAdesivasComponent,
     CalendarComponent,
     ContactComponent,
-    NgbdSortableHeader
+    NgbdSortableHeader,
+    AdmComponent
   ],
   imports: [
     FlatpickrModule.forRoot(),
@@ -137,7 +139,6 @@ registerLocaleData(localePT);
     AuthService,
     LocalStorageService,
     AuthGuard,
-    ListUserResolver,
     MessageService, ConfirmationService,
     DecimalPipe,
     ContactService],
