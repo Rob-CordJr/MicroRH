@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from '../services/local-storage.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface NotaAdesiva {
   cor: string;
@@ -17,16 +18,31 @@ interface NotaAdesiva {
 })
 export class NotasAdesivasComponent implements OnInit {
   @Input()
+  form: FormGroup;
   notas = [
     { cor: '#ffcc00',x: 0, y: 0, textoControl: new FormControl('Nota 1') },
     { cor: '#00ccff',x: 0, y: 0 ,textoControl: new FormControl('Nota 2') },
     { cor: '#cc00ff',x: 0, y: 0 ,textoControl: new FormControl('Nota 3') }
   ];
   notasAdesivas: NotaAdesiva[] = [];
+  selectedPriority: any;
+  priorities = [
+    { priority: 'Alta', color: 'red' },
+    { priority: 'Média', color: 'yellow' },
+    { priority: 'Baixa', color: 'green' }
+  ];
+  
 
   constructor(
-
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder
   ) {
+
+    this.form = this.formBuilder.group({
+      title: new FormControl('', [Validators.required]),
+      note: new FormControl('', [Validators.required]),
+      priority: new FormControl('', [Validators.required])
+    });
 
   }
 
@@ -35,6 +51,11 @@ export class NotasAdesivasComponent implements OnInit {
 
   }
 
+  openVerticallyCentered(content : any) {
+		this.modalService.open(content, { centered: true });
+	}
+
+ 
   adicionarNotaAdesiva() {
     const novaNota: NotaAdesiva = {
       cor: 'yellow',
