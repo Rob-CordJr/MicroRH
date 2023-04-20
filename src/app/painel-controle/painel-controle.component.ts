@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -18,7 +19,7 @@ export class PainelControleComponent implements OnInit {
 
   
 
-  constructor(private modalService : NgbModal) { }
+  constructor(private modalService : NgbModal, private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +27,22 @@ export class PainelControleComponent implements OnInit {
   openVerticallyCentered(content : any) {
     this.modalService.open(content, { centered: true });
   }
+
+  navigateToContact() {
+    this.router.navigate(['/contact']);
+  }
+
+  navigateToCalendar() {
+    this.router.navigate(['/calendar']);
+  }
+
+  navigateToNotes() {
+    this.router.navigate(['/notas']);
+  }
+  
+  
+
+
 
 
 

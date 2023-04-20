@@ -28,7 +28,7 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="title-note">Titulo do Lembrete</label>
-            <input type="text" formControlName="title">
+            <input type="text" class="form-control" formControlName="title">
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="note">Lembrete: </label>
-            <textarea formControlName="note"></textarea>
+            <textarea formControlName="note" class="form-control"></textarea>
           </div>
         </div>
 
@@ -46,7 +46,7 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="title-note">Prioridade: </label>
-            <select formControlName="priority">
+            <select formControlName="priority" class="form-control">
               <option *ngFor="let priority of priorities" [value]="priority.priority"
                 [style.background-color]="priority.color">
                 {{ priority.priority }}</option>

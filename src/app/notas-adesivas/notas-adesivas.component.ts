@@ -28,7 +28,7 @@ export class NotasAdesivasComponent implements OnInit {
   // ];
   notasAdesivas: NotaAdesiva[] = [];
   selectedPriority: any;
-  priorities = [{ priority: 'Alta', color: '#FF0000', cor: 'red' }, { priority: 'Média', color: '#FFA500', cor: 'orange' }, { priority: 'Baixa', color: '#FFFF00', cor: 'yellow' }];
+  priorities = [{ priority: 'Critica', color: '#B22222', cor: '#B22222' },{ priority: 'Alta', color: '#FF4500', cor: '#FF4500' }, { priority: 'Média', color: '#FFD700', cor: '#FFD700' }, { priority: 'Baixa', color: '#008000', cor: '#008000' }];
 
 
 

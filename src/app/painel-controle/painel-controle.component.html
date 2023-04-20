@@ -108,7 +108,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <a routerLink="contact">
+                <a (click)="navigateToContact()">
                     <div class="card" (mouseover)="contatos=true" (mouseout)="contatos=false">
                         <h5 class="text" *ngIf="!contatos">Contatos</h5>
                         <img src="../../assets/img/contact.png" *ngIf="!contatos" class="img_menu">
@@ -117,7 +117,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a routerLink="calendar">
+                <a (click)="navigateToCalendar()">
                     <div class="card" (mouseover)="calendar=true" (mouseout)="calendar=false">
                         <h5 class="text" *ngIf="!calendar">Calendario</h5>
                         <img src="../../assets/img/calendar.png" *ngIf="!calendar" class="img_menu">
@@ -127,7 +127,7 @@
             </div>
 
             <div class="col-md-3">
-                <a routerLink="notas">
+                <a (click)="navigateToNotes()">
                     <div class="card" (mouseover)="notes=true" (mouseout)="notes=false">
                         <h5 class="text" *ngIf="!notes">Notas Adesivas</h5>
                         <img src="../../assets/img/notas.png" *ngIf="!notes" class="img_menu">
