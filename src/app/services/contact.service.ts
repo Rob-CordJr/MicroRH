@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Injectable, PipeTransform } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, catchError, debounceTime, delay, interval, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, debounceTime, delay, distinctUntilChanged, interval, map, of, switchMap, tap } from 'rxjs';
 import { Contact } from '../models/Contact';
 import { SortDirection } from '../directives/sortable.directive';
 import { DecimalPipe } from '@angular/common';
@@ -36,11 +36,9 @@ function sort(contact: Contact[], column: string, direction: string): Contact[] 
 
 function matches(contact: Contact, term: string) {
   term = term ? term.toLowerCase() : '';
-  
-  
-  return contact.nm_contact.toLowerCase().includes(term)
-    || contact.nm_setor && contact.nm_setor.toLowerCase().includes(term)
-    || contact.num_ramal && contact.num_ramal.toLowerCase().includes(term)
+  return (contact.nm_contact && contact.nm_contact.toLowerCase().indexOf(term) === 0)
+    || (contact.nm_setor && contact.nm_setor.toLowerCase().indexOf(term) === 0)
+    || (contact.num_ramal && contact.num_ramal.toLowerCase().indexOf(term) === 0)
 }
 
 
@@ -55,6 +53,7 @@ export class ContactService {
   private _contact$ = new BehaviorSubject<Contact[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   contacts: Contact[] = []
+
 
   private _state: State = {
     page: 1,
@@ -79,17 +78,28 @@ export class ContactService {
 
 
 
-    this._search$.pipe(
-      tap(() => this._loading$.next(true)),
-      debounceTime(200),
-      switchMap(() => this._search()),
-      delay(200),
-      tap(() => this._loading$.next(false))
-    ).subscribe((result) => {
+    // this._search$.pipe(
+    //   tap(() => this._loading$.next(true)),
+    //   debounceTime(200),
+    //   switchMap(() => this._search()),
+    //   delay(200),
+    //   tap(() => this._loading$.next(false))
+    // ).subscribe((result) => {
+    //   this._contact$.next(result.contact);
+    //   this._total$.next(result.total)
+    // });
 
-      this._contact$.next(result.contact);
-      this._total$.next(result.total)
-    });
+    this._search$
+      .pipe(
+        debounceTime(300), // Espere 300ms após a última digitação
+        distinctUntilChanged(), // Verifique se o termo de pesquisa mudou
+        switchMap(() => this._search())
+      )
+      .subscribe((result) => {
+        this._contact$.next(result.contact);
+        this._total$.next(result.total);
+      });
+
 
     this._search$.next()
 
@@ -117,11 +127,11 @@ export class ContactService {
     return this.http.get<Contact>(environment.apiUrl + 'contacts' + id)
   }
 
-  updateContact(contact : Contact) : Observable<Contact>{
-      return this.http.patch<Contact>(environment.apiUrl + 'contacts/' + contact._id, contact);
+  updateContact(contact: Contact): Observable<Contact> {
+    return this.http.patch<Contact>(environment.apiUrl + 'contacts/' + contact._id, contact);
   }
 
-  deleteContact(id : Contact) : Observable<Contact>{
+  deleteContact(id: Contact): Observable<Contact> {
     return this.http.delete<Contact>(environment.apiUrl + 'contacts' + id)
   }
 
@@ -150,33 +160,49 @@ export class ContactService {
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
+
     this._search$.next();
   }
 
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
-    // let contacts = this._contact$.getValue();
+
+    // // 1. filter
+    // let contacts = this._contact$.getValue().filter((contact: Contact) => matches(contact, searchTerm));
 
 
-    
-    // 1. sort
-    let contacts = sort(this._contact$.getValue(), sortColumn, sortDirection);
-  
-    // 2. filter
-    contacts = contacts.filter((contact) => matches(contact, searchTerm));
-    
-    // 3. paginate
-    const total = contacts.length;
-    const totalPages = Math.ceil(total / pageSize);
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, total);
-    contacts = contacts.slice(startIndex, endIndex);
+
+    // // 2. sort
+    // contacts = sort(contacts, sortColumn, sortDirection);
+
+    // // 3. paginate
+    // const total = contacts.length;
+    // const startIndex = (this.page - 1) * this.pageSize;
+    // const endIndex = Math.min(startIndex + this.pageSize, total);
+    // contacts = contacts.slice(startIndex, endIndex);
 
 
-    return of({ contact: contacts, total: totalPages });
+    // ...
+    // 1. filter
+    let filteredContacts = this._contact$.getValue().filter((contact: Contact) => matches(contact, searchTerm));
+
+    // 2. paginate
+    const total = filteredContacts.length;
+    const startIndex = (this.page - 1) * this.pageSize;
+    const endIndex = Math.min(startIndex + this.pageSize, total);
+    filteredContacts = filteredContacts.slice(startIndex, endIndex);
+
+    // 3. sort
+    filteredContacts = sort(filteredContacts, sortColumn, sortDirection);
+
+    return of({ contact: filteredContacts, total: total });
+
+
+
+    // return of({ contact: contacts, total: total });
   }
 
- 
 
-  
+
+
 }
